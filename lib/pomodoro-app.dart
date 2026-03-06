@@ -8,18 +8,67 @@ class PomodoroApp extends StatelessWidget {
       home: Material(
         color: Colors.green[50],
         child: SafeArea(
-          child: Container(
-            width: 125,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(77, 218, 110, 0.15),
-              border: Border.all(color: Colors.green[900]!),
-              borderRadius: BorderRadius.circular(25),
-            ),
-            padding: EdgeInsets.all(8),
-            child: Row(
-              // spacing: 4,
-              children: [Icon(Icons.coffee_outlined), Text("Short Break")],
-            ),
+          child: Column(
+            spacing: 5,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(77, 218, 110, 0.15),
+                  border: Border.all(color: Colors.green[900]!),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                padding: EdgeInsets.all(8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [Icon(Icons.coffee_outlined), Text("Short Break")],
+                ),
+              ),
+              Text(
+                "05\n00",
+                style: TextStyle(
+                  fontSize: 256,
+                  color: Colors.green[900],
+                  fontWeight: FontWeight.w300,
+                  height: 0.85,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 16,
+                children: [
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 218, 110, 0.15),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Icon(Icons.forward_10_outlined, size: 32),
+                  ),
+                  Container(
+                    width: 102,
+                    height: 96,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 218, 110, 0.62),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Icon(Icons.play_arrow, size: 32),
+                  ),
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(77, 218, 110, 0.15),
+                      borderRadius: BorderRadius.circular(32),
+                    ),
+                    child: Icon(Icons.fast_forward, size: 32),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
