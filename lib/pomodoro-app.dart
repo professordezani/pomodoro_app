@@ -1,6 +1,35 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-class PomodoroApp extends StatelessWidget {
+class PomodoroApp extends StatefulWidget {
+  @override
+  State<PomodoroApp> createState() => _PomodoroAppState();
+}
+
+class _PomodoroAppState extends State<PomodoroApp> {
+  // atributos:
+  int seconds = 60;
+
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(Duration(seconds: 1), (t) => tira1Segundo(t));
+  }
+
+  void tira1Segundo(Timer _) {
+    if (seconds > 0)
+      setState(() => seconds -= 1);
+    else
+      setState(() => seconds = 25);
+  }
+
+  void add10Seconds() {
+    setState(() => seconds -= 10);
+  }
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -26,7 +55,7 @@ class PomodoroApp extends StatelessWidget {
                 ),
               ),
               Text(
-                "05\n00",
+                "${seconds.toString().padLeft(2, '0')}\n00",
                 style: TextStyle(
                   fontSize: 256,
                   color: Colors.green[900],
@@ -39,32 +68,44 @@ class PomodoroApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 16,
                 children: [
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 218, 110, 0.15),
-                      borderRadius: BorderRadius.circular(32),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(32),
+                    onTap: add10Seconds,
+                    child: Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(77, 218, 110, 0.15),
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Icon(Icons.forward_10_outlined, size: 32),
                     ),
-                    child: Icon(Icons.forward_10_outlined, size: 32),
                   ),
-                  Container(
-                    width: 102,
-                    height: 96,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 218, 110, 0.62),
-                      borderRadius: BorderRadius.circular(32),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(32),
+                    onTap: () {},
+                    child: Container(
+                      width: 102,
+                      height: 96,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(77, 218, 110, 0.62),
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Icon(Icons.play_arrow, size: 32),
                     ),
-                    child: Icon(Icons.play_arrow, size: 32),
                   ),
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(77, 218, 110, 0.15),
-                      borderRadius: BorderRadius.circular(32),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(32),
+                    onTap: () {},
+                    child: Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(77, 218, 110, 0.15),
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Icon(Icons.fast_forward, size: 32),
                     ),
-                    child: Icon(Icons.fast_forward, size: 32),
                   ),
                 ],
               ),
