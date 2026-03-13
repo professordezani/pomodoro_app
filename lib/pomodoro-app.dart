@@ -10,6 +10,13 @@ class PomodoroApp extends StatefulWidget {
 class _PomodoroAppState extends State<PomodoroApp> {
   // atributos:
   int seconds = 60;
+  var backgroundColor = Colors.green[50];
+  var lightColor = Color.fromRGBO(77, 218, 110, 0.15);
+  var darkColor = Color.fromRGBO(77, 218, 110, 0.62);
+  var borderColor = Colors.green[900];
+  var fontColor = Colors.green[900];
+  var icon = Icons.coffee_outlined;
+  var title = "Short Break";
 
   Timer? _timer;
 
@@ -35,7 +42,7 @@ class _PomodoroAppState extends State<PomodoroApp> {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Material(
-        color: Colors.green[50],
+        color: backgroundColor,
         child: SafeArea(
           child: Column(
             spacing: 5,
@@ -44,21 +51,21 @@ class _PomodoroAppState extends State<PomodoroApp> {
               Container(
                 width: 150,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(77, 218, 110, 0.15),
-                  border: Border.all(color: Colors.green[900]!),
+                  color: lightColor,
+                  border: Border.all(color: borderColor!),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 padding: EdgeInsets.all(8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [Icon(Icons.coffee_outlined), Text("Short Break")],
+                  children: [Icon(icon), Text(title)],
                 ),
               ),
               Text(
                 "${seconds.toString().padLeft(2, '0')}\n00",
                 style: TextStyle(
                   fontSize: 256,
-                  color: Colors.green[900],
+                  color: fontColor,
                   fontWeight: FontWeight.w300,
                   height: 0.85,
                 ),
@@ -75,7 +82,7 @@ class _PomodoroAppState extends State<PomodoroApp> {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(77, 218, 110, 0.15),
+                        color: lightColor,
                         borderRadius: BorderRadius.circular(32),
                       ),
                       child: Icon(Icons.forward_10_outlined, size: 32),
@@ -88,7 +95,7 @@ class _PomodoroAppState extends State<PomodoroApp> {
                       width: 102,
                       height: 96,
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(77, 218, 110, 0.62),
+                        color: darkColor,
                         borderRadius: BorderRadius.circular(32),
                       ),
                       child: Icon(Icons.play_arrow, size: 32),
@@ -101,7 +108,7 @@ class _PomodoroAppState extends State<PomodoroApp> {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(77, 218, 110, 0.15),
+                        color: lightColor,
                         borderRadius: BorderRadius.circular(32),
                       ),
                       child: Icon(Icons.fast_forward, size: 32),
