@@ -7,6 +7,8 @@ class PomodoroApp extends StatefulWidget {
   State<PomodoroApp> createState() => _PomodoroAppState();
 }
 
+enum Status { shortBreak, workHard }
+
 class _PomodoroAppState extends State<PomodoroApp> {
   // atributos:
   int seconds = 60;
@@ -17,24 +19,54 @@ class _PomodoroAppState extends State<PomodoroApp> {
   var fontColor = Colors.green[900];
   var icon = Icons.coffee_outlined;
   var title = "Short Break";
+  var status = Status.shortBreak;
 
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 1), (t) => tira1Segundo(t));
   }
 
-  void tira1Segundo(Timer _) {
-    if (seconds > 0)
+  void _start() {
+    _timer = Timer.periodic(Duration(seconds: 1), _decrease1Second);
+  }
+
+  void _decrease1Second(Timer _) {
+    if (seconds > 0) {
       setState(() => seconds -= 1);
-    else
-      setState(() => seconds = 25);
+    } else {
+      _changeStatus();
+    }
+  }
+
+  void _changeStatus() {
+    if (status == Status.shortBreak) {
+      status = Status.workHard;
+      seconds = 60;
+      backgroundColor = Colors.red[50];
+      lightColor = Color.fromRGBO(255, 76, 76, 0.15);
+      darkColor = Color.fromRGBO(255, 76, 76, 0.62);
+      borderColor = Colors.red[900];
+      fontColor = Colors.red[900];
+      icon = Icons.run_circle_outlined;
+      title = "Work Hard";
+    } else {
+      status = Status.shortBreak;
+      seconds = 30;
+      backgroundColor = Colors.green[50];
+      lightColor = Color.fromRGBO(77, 218, 110, 0.15);
+      darkColor = Color.fromRGBO(77, 218, 110, 0.62);
+      borderColor = Colors.green[900];
+      fontColor = Colors.green[900];
+      icon = Icons.coffee_outlined;
+      title = "Short Break";
+    }
+    setState(() {});
   }
 
   void add10Seconds() {
-    setState(() => seconds -= 10);
+    setState(() => seconds += 10);
   }
 
   @override
@@ -90,7 +122,7 @@ class _PomodoroAppState extends State<PomodoroApp> {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(32),
-                    onTap: () {},
+                    onTap: _start,
                     child: Container(
                       width: 102,
                       height: 96,
